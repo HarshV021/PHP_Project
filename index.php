@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>THIS IS A DEMO </title>
+<title> This is a Demo </title>
     <title>File Upload in PHP</title>
 
 </head>
