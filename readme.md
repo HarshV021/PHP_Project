@@ -7,4 +7,3 @@ This is a basic PHP project set up for learning and development purposes.
 - Local server setup using XAMPP/WAMP/MAMP
 - Git version control integrated with GitHub
 - This is a Demo
-- Whatever it is 
