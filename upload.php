@@ -9,7 +9,7 @@ if (file_exists($targetFile)) {
     echo "Sorry, file already exists.<br>";
     $uploadOk = 0;
 }
-echo "Hello,How Are You";
+
 // Limit file size to 2MB
 if ($_FILES["fileToUpload"]["size"] > 2000000) {
     echo "Sorry, your file is too large.<br>";

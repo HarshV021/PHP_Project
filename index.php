@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
+<title>THIS IS A DEMO </title>
     <title>File Upload in PHP</title>
+
 </head>
 <body>
     <h2>Upload a File</h2>
