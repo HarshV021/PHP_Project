@@ -1,36 +1,28 @@
 <?php
-$targetDir = "uploads/";
-$targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_FILES["fileToUpload"]) && $_FILES["fileToUpload"]["error"] === UPLOAD_ERR_OK) {
+        $fileName = $_FILES["fileToUpload"]["name"];
+        $fileTmp = $_FILES["fileToUpload"]["tmp_name"];
+        $fileType = $_FILES["fileToUpload"]["type"];
 
-// Check if file already exists
-if (file_exists($targetFile)) {
-    echo "Sorry, file already exists.<br>";
-    $uploadOk = 0;
-}
+        $allowed = ['image/jpeg', 'image/png', 'application/pdf', 'text/plain'];
 
-// Limit file size to 2MB
-if ($_FILES["fileToUpload"]["size"] > 2000000) {
-    echo "Sorry, your file is too large.<br>";
-    $uploadOk = 0;
-}
-
-// Allow only specific file formats
-$allowedTypes = ["jpg", "png", "pdf", "txt"];
-if (!in_array($fileType, $allowedTypes)) {
-    echo "Only JPG, PNG, PDF & TXT files are allowed.<br>";
-    $uploadOk = 0;
-}
-
-// Upload file if checks passed
-if ($uploadOk) {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
-        echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+        if (in_array($fileType, $allowed)) {
+            move_uploaded_file($fileTmp, "uploads/" . basename($fileName));
+            echo "File uploaded successfully.";
+        } else {
+            echo "Only JPG, PNG, PDF & TXT files are allowed.";
+        }
     } else {
-        echo "Sorry, there was an error uploading your file.";
-        
+        echo "No file uploaded or upload error.";
     }
-    
+} else {
+    // Show upload form if it's not a POST request
+    ?>
+    <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <input type="file" name="fileToUpload">
+        <input type="submit" value="Upload File">
+    </form>
+    <?php
 }
 ?>
